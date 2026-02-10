@@ -1,0 +1,17 @@
+{
+  // Visit https://aka.ms/tsconfig to read more about this fil
+
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "rootDir": "./src",
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "moduleDetection": "force",
+    "moduleResolution": "node",
+    "typeRoots": ["./types", "./node_modules/@types"]
+  }
+}
