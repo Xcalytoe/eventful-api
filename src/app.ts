@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 
 // passport-jwt middleware (make sure to require and set this up properly)
-require("./src/middleware/auth");
+// require("./src/middleware/auth");
 
 // Routes
 app.get("/", (_, res) => {
