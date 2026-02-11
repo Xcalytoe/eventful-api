@@ -1,24 +1,39 @@
-import express, { Application, Request, Response, NextFunction } from "express";
+import express, { Request, Response, NextFunction } from "express";
+import cookieParser from "cookie-parser";
 import APP_CONFIG from "./config";
+import {
+  eventRoutes,
+  ticketRoutes,
+  analyticsRoutes,
+  attendeesRoutes,
+  usersRoutes,
+} from "./routes";
 
 const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(cookieParser());
 
 // passport-jwt middleware (make sure to require and set this up properly)
 // require("./src/middleware/auth");
 
+const API_BASE = `/api/${APP_CONFIG.API_VERSION}`;
 // Routes
 app.get("/", (_, res) => {
   res.status(200).json({
-    message: "Welcome to the Blog API",
+    message: "Welcome to the Eventful API",
     version: "1.0",
     documentation: "https://github.com/Xcalytoe/eventful",
   });
 });
-// app.use(`/api/${VERSION}/user`, authRoute);
-// app.use(`/api/${VERSION}/articles`, articleRoute);
+
+// Route registration
+app.use(`${API_BASE}/users`, usersRoutes);
+app.use(`${API_BASE}/events`, eventRoutes);
+app.use(`${API_BASE}/tickets`, ticketRoutes);
+app.use(`${API_BASE}/attendees`, attendeesRoutes);
+app.use(`${API_BASE}/analytics`, analyticsRoutes);
 
 //  Handle 404 (route not found)
 app.use((req: Request, res: Response, next: NextFunction) => {

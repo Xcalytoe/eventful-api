@@ -3,6 +3,8 @@ import express, { Application, Request, Response, NextFunction } from "express";
 import app from "./app";
 import connectDb from "./config/db";
 import { rateLimit } from "express-rate-limit";
+import { initEmailQueue } from "./queues/emailQueue";
+import "./workers/emailWorker"; // Import to start the worker
 // import morgan from "morgan";
 // import session from "express-session";
 
@@ -44,8 +46,9 @@ app.use(express.json());
 app.use(limiter);
 
 // Connect to the database and then start the server
-connectDb().then(() => {
+connectDb().then(async () => {
+  await initEmailQueue();
   app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    console.log(`Server running on port http://localhost:${PORT}`);
   });
 });
