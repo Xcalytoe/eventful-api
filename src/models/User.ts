@@ -20,7 +20,8 @@ const userSchema = new Schema<IUser>({
   },
   role: {
     type: String,
-    required: [true, "Please enter role"],
+    required: false,
+    default: "attendee",
     trim: true,
   },
   password: {

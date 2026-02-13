@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import Event from "../models/Event";
 import Attendee from "../models/Attendee";
+import Organizer from "../models/Organizer";
+import { IApplicant } from "../types/user";
 
 export const getEvents = async (req: Request, res: Response) => {
   try {
@@ -66,7 +68,7 @@ export const applyToEvent = async (req: Request, res: Response) => {
       name: req.user.name,
       username: req.user.username,
       email: req.user.email,
-    });
+    } as IApplicant);
 
     await event.save();
 
@@ -103,7 +105,6 @@ export const applyToEvent = async (req: Request, res: Response) => {
 export const getAppliedEvents = async (req: Request, res: Response) => {
   try {
     const attendee = await Attendee.findOne({ userId: req.user.id });
-
     if (!attendee) {
       return res.status(404).json({
         success: false,
@@ -115,6 +116,34 @@ export const getAppliedEvents = async (req: Request, res: Response) => {
       success: true,
       count: attendee.appliedEvents.length,
       data: attendee.appliedEvents,
+    });
+  } catch (err: any) {
+    return res.status(500).json({
+      success: false,
+      error: err.message,
+    });
+  }
+};
+
+export const getEventAttendees = async (req: Request, res: Response) => {
+  try {
+    const organizer = await Organizer.findOne({ userId: req.user.id });
+
+    if (!organizer) {
+      return res.status(404).json({
+        success: false,
+        message: "Organizer not found",
+      });
+    }
+
+    const events = await Event.find({ "organizer.organizerId": organizer._id });
+
+    const allAttendees = events.flatMap((event) => event.applicants);
+
+    return res.status(200).json({
+      success: true,
+      count: allAttendees.length,
+      data: allAttendees,
     });
   } catch (err: any) {
     return res.status(500).json({

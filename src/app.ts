@@ -8,6 +8,8 @@ import {
   attendeesRoutes,
   usersRoutes,
 } from "./routes";
+import swaggerUi from "swagger-ui-express";
+import swaggerSpec from "./config/swagger";
 
 const app = express();
 
@@ -19,6 +21,10 @@ app.use(cookieParser());
 // require("./src/middleware/auth");
 
 const API_BASE = `/api/${APP_CONFIG.API_VERSION}`;
+
+// Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 // Routes
 app.get("/", (_, res) => {
   res.status(200).json({

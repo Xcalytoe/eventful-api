@@ -8,6 +8,7 @@ import { eventSchema } from "../utils/validationSchema";
 import { sendReminderEmails } from "../utils/sendEmails"; // Note: sendEventCreationEmail might be needed, but I'll use sendReminderEmails if creation email is not available yet or create it.
 
 export const getEvents = async (req: Request, res: Response) => {
+  console.log(req.headers, "headers");
   try {
     const events = await Event.find();
     return res.status(200).json({
@@ -47,8 +48,8 @@ export const getSingleEvent = async (req: Request, res: Response) => {
 };
 
 export const searchEvents = async (req: Request, res: Response) => {
-  const { search } = req.body;
-  const newSearch = new RegExp(search, "i");
+  const { search } = req.query;
+  const newSearch = new RegExp(search as string, "i");
 
   try {
     const events = await Event.find({
@@ -97,8 +98,10 @@ export const addEvent = async (req: Request, res: Response) => {
       });
     }
 
-    const result = await cloudinary.uploader.upload(req.file.path);
-
+    const result = await cloudinary.uploader.upload(req.file.path, {
+      folder: "Eventful-api",
+    });
+    console.log(result, "upload result");
     fs.unlink(req.file.path, (err) => {
       if (err) console.error(err);
     });
@@ -164,10 +167,7 @@ export const addEvent = async (req: Request, res: Response) => {
 export const deleteEvent = async (req: Request, res: Response) => {
   try {
     const event = await Event.findOne({
-      $and: [
-        { _id: req.params.id },
-        { "organizer.organizerId": req.user.id }, // Note: This might need adjustment if organizerId in Event is Organizer._id
-      ],
+      $and: [{ _id: req.params.id }, { "organizer.organizerId": req.user.id }],
     });
 
     if (!event) {
@@ -182,6 +182,49 @@ export const deleteEvent = async (req: Request, res: Response) => {
     return res.status(200).json({
       success: true,
       data: {},
+    });
+  } catch (err: any) {
+    return res.status(500).json({
+      success: false,
+      error: err.message,
+    });
+  }
+};
+
+export const getMyEvents = async (req: Request, res: Response) => {
+  try {
+    const events = await Event.find({ "organizer.organizerId": req.user.id });
+
+    return res.status(200).json({
+      success: true,
+      count: events.length,
+      data: events,
+    });
+  } catch (err: any) {
+    return res.status(500).json({
+      success: false,
+      error: err.message,
+    });
+  }
+};
+
+export const getEventApplicants = async (req: Request, res: Response) => {
+  try {
+    const event = await Event.findOne({
+      $and: [{ _id: req.params.id }, { "organizer.organizerId": req.user.id }],
+    });
+
+    if (!event) {
+      return res.status(404).json({
+        success: false,
+        message: "No event found or unauthorized",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      count: event.applicants.length,
+      data: event.applicants,
     });
   } catch (err: any) {
     return res.status(500).json({

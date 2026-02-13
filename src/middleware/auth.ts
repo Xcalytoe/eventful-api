@@ -20,11 +20,12 @@ export const protect = async (
   let token;
 
   // Get token from cookies or Authorization header
-  if (req.cookies && req.cookies.authToken) {
-    token = req.cookies.authToken;
-  } else if (
+  // if (req.cookies && req.cookies.authToken) {
+  //   token = req.cookies.authToken;
+  // } else
+  if (
     req.headers.authorization &&
-    req.headers.authorization.startsWith("Bearer")
+    req.headers.authorization.toLowerCase().startsWith("bearer")
   ) {
     token = req.headers.authorization.split(" ")[1];
   }
@@ -48,7 +49,6 @@ export const protect = async (
         message: "The user belonging to this token no longer exists.",
       });
     }
-
     // Grant access to protected route
     req.user = currentUser;
     next();

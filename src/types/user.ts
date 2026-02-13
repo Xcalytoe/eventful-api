@@ -33,7 +33,7 @@ export interface IOrganizer extends Document {
 }
 
 export interface IApplicant {
-  applicantId: Schema.Types.ObjectId;
+  applicantId: mongoose.Types.ObjectId;
   name: string;
   username: string;
   email: string;

@@ -33,7 +33,12 @@ export const registerUser = async (req: Request, res: Response) => {
       password: hashedPassword,
       role,
     });
-
+    if (!!role && role !== "organizer" && role !== "attendee") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid role",
+      });
+    }
     // Create profile based on role
     if (role === "organizer") {
       if (!organizationName) {
@@ -47,7 +52,8 @@ export const registerUser = async (req: Request, res: Response) => {
         organizationName,
         createdEvents: [],
       });
-    } else {
+    }
+    if (role === "attendee") {
       await Attendee.create({
         userId: user._id,
         appliedEvents: [],
@@ -55,14 +61,6 @@ export const registerUser = async (req: Request, res: Response) => {
         tickets: [],
       });
     }
-
-    // Generate JWT and set in cookie
-    const token = generateToken({ id: user._id });
-    res.cookie("authToken", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
 
     return res.status(201).json({
       success: true,
@@ -108,19 +106,16 @@ export const loginUser = async (req: Request, res: Response) => {
     }
 
     const token = generateToken({ id: user._id });
-    res.cookie("authToken", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
-    });
+    // res.cookie("authToken", token, {
+    //   httpOnly: true,
+    //   secure: process.env.NODE_ENV === "production",
+    //   maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
+    // });
 
     return res.status(200).json({
       success: true,
       data: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
+        token,
       },
     });
   } catch (error: any) {

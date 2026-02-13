@@ -1,4 +1,3 @@
-import dotenv from "dotenv";
 import express, { Application, Request, Response, NextFunction } from "express";
 import app from "./app";
 import connectDb from "./config/db";
@@ -9,7 +8,6 @@ import "./workers/emailWorker"; // Import to start the worker
 // import session from "express-session";
 
 const cors = require("cors");
-dotenv.config();
 
 const PORT = process.env.PORT || 3000;
 
