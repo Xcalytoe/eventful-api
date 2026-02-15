@@ -23,8 +23,8 @@ app.use(cookieParser());
 const API_BASE = `/api/${APP_CONFIG.API_VERSION}`;
 
 // Swagger UI
-const CSS_URL =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+// const CSS_URL =
+//   "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
 
 // app.use(
 //   "/api-docs",
@@ -37,12 +37,18 @@ const CSS_URL =
 //     ],
 //   }),
 // );
+const CSS_URL = "https://cdnjs.cloudflare.com";
+const JS_URLS = [
+  "https://cdnjs.cloudflare.com",
+  "https://cdnjs.cloudflare.com",
+];
+
 app.use(
   "/api-docs",
   swaggerUi.serve,
   swaggerUi.setup(swaggerSpec, {
-    customCssUrl:
-      "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css", // Use CDN for CSS on Vercel deployment [Source 0.4.5, 0.4.28]
+    customCssUrl: CSS_URL,
+    customJs: JS_URLS,
   }),
 );
 

@@ -50,6 +50,6 @@ const options: swaggerJsdoc.Options = {
   apis: ["./src/routes/*.ts"], // Path to the API docs
 };
 
-const swaggerSpec = swaggerJsdoc(options);
+export const swaggerSpec = swaggerJsdoc(options);
 
 export default swaggerSpec;
