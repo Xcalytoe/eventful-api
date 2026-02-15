@@ -1,13 +1,13 @@
-import eventRoutes from "../routes/events.route";
-import ticketRoutes from "../routes/tickets.route";
-import analyticsRoutes from "../routes/analytics.route";
-import attendeesRoutes from "../routes/attendees.route";
-import usersRoutes from "../routes/users.route";
+import eventRoutes from "./events.route";
+import ticketRoutes from "./tickets.route";
+import attendeesRoutes from "./attendees.route";
+import analyticsRoutes from "./analytics.route";
+import usersRoutes from "./users.route";
 
 export {
   eventRoutes,
   ticketRoutes,
-  analyticsRoutes,
   attendeesRoutes,
+  analyticsRoutes,
   usersRoutes,
 };
