@@ -13,8 +13,7 @@ const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   `http://localhost:${PORT}`,
-  "https://eventful-frontend.vercel.app",
-  "https://eventful-lbd.netlify.app/",
+  "https://eventful-api-beta.vercel.app/",
 ];
 
 const corsOptions = {
