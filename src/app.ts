@@ -8,7 +8,7 @@ import {
   attendeesRoutes,
   usersRoutes,
 } from "./routes";
-import swaggerDocument from "../swagger.json";
+import swaggerUi from "swagger-ui-express";
 import swaggerSpec from "./config/swagger";
 
 const app = express();
@@ -21,41 +21,42 @@ const API_BASE = `/api/${APP_CONFIG.API_VERSION}`;
 
 // Swagger UI
 
-app.get("/api-docs/swagger.json", (_req, res) => {
-  res.json(swaggerSpec);
-});
+// app.get("/api-docs/swagger.json", (_req, res) => {
+//   res.json(swaggerSpec);
+// });
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.get("/api-docs", (_req, res) => {
-  res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-      <meta charset="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
-      <title>Eventful API Documentation</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css" />
-    </head>
-    <body>
-      <div id="swagger-ui"></div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js" crossorigin></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js" crossorigin></script>
-      <script>
-        window.onload = () => {
-          window.ui = SwaggerUIBundle({
-            url: '/api-docs/swagger.json',
-            dom_id: '#swagger-ui',
-            presets: [
-              SwaggerUIBundle.presets.apis,
-              SwaggerUIStandalonePreset
-            ],
-            layout: "StandaloneLayout",
-          });
-        };
-      </script>
-    </body>
-    </html>
-  `);
-});
+// app.get("/api-docs", (_req, res) => {
+//   res.send(`
+//     <!DOCTYPE html>
+//     <html lang="en">
+//     <head>
+//       <meta charset="utf-8" />
+//       <meta name="viewport" content="width=device-width, initial-scale=1" />
+//       <title>Eventful API Documentation</title>
+//       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css" />
+//     </head>
+//     <body>
+//       <div id="swagger-ui"></div>
+//       <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js" crossorigin></script>
+//       <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js" crossorigin></script>
+//       <script>
+//         window.onload = () => {
+//           window.ui = SwaggerUIBundle({
+//             url: '/api-docs/swagger.json',
+//             dom_id: '#swagger-ui',
+//             presets: [
+//               SwaggerUIBundle.presets.apis,
+//               SwaggerUIStandalonePreset
+//             ],
+//             layout: "StandaloneLayout",
+//           });
+//         };
+//       </script>
+//     </body>
+//     </html>
+//   `);
+// });
 
 // Routes
 app.get("/", (_, res) => {
