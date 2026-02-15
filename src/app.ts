@@ -8,7 +8,7 @@ import {
   attendeesRoutes,
   usersRoutes,
 } from "./routes";
-import { swaggerSpec } from "./config/swagger";
+import swaggerDocument from "../swagger.json";
 
 const app = express();
 
@@ -21,7 +21,7 @@ const API_BASE = `/api/${APP_CONFIG.API_VERSION}`;
 // Swagger UI
 
 app.get("/api-docs/swagger.json", (_req, res) => {
-  res.json(swaggerSpec);
+  res.json(swaggerDocument);
 });
 
 app.get("/api-docs", (_req, res) => {
