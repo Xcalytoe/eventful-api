@@ -13,7 +13,8 @@ const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   `http://localhost:${PORT}`,
-  "https://eventful-api-beta.vercel.app/",
+  "https://eventful-frontend.vercel.app",
+  "https://eventful-lbd.netlify.app/",
 ];
 
 const corsOptions = {
@@ -32,9 +33,6 @@ const limiter = rateLimit({
   },
 });
 
-// const app = require("./app");
-// const connectDb = require("./src/config/db"); // Assuming the database connection logic is in this file.
-
 // Enable CORS
 app.use(cors(corsOptions));
 // Parse JSON bodies
@@ -43,9 +41,14 @@ app.use(express.json());
 app.use(limiter);
 
 // Connect to the database and then start the server
-connectDb().then(async () => {
-  await initEmailQueue();
-  app.listen(PORT, () => {
-    console.log(`Server running on port http://localhost:${PORT}`);
+// Connect to the database and then start the server
+if (require.main === module) {
+  connectDb().then(async () => {
+    await initEmailQueue();
+    app.listen(PORT, () => {
+      console.log(`Server running on port http://localhost:${PORT}`);
+    });
   });
-});
+}
+
+export default app;
