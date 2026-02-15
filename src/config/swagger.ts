@@ -13,7 +13,7 @@ const options: swaggerJsdoc.Options = {
       process.env.NODE_ENV === "production"
         ? [
             {
-              url: `https://eventful-api-beta.vercel.app/api/${APP_CONFIG.API_VERSION}`,
+              url: `https://eventful-api-7f0t.onrender.com/api/${APP_CONFIG.API_VERSION}`,
               description: "Production server",
             },
             {
@@ -27,7 +27,7 @@ const options: swaggerJsdoc.Options = {
               description: "Development server",
             },
             {
-              url: `https://eventful-api-beta.vercel.app/api/${APP_CONFIG.API_VERSION}`,
+              url: `https://eventful-api-7f0t.onrender.com//api/${APP_CONFIG.API_VERSION}`,
               description: "Production server",
             },
           ],
