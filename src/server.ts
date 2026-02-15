@@ -13,13 +13,13 @@ const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   `http://localhost:${PORT}`,
-  "https://eventful-api-beta.vercel.app/",
+  "https://eventful-api-beta.vercel.app",
 ];
 
 const corsOptions = {
   origin: allowedOrigins,
   credentials: true,
-  methods: "GET,POST,OPTIONS",
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
   allowedHeaders: ["Content-Type", "Authorization", "Origin", "Accept"],
 };
 const limiter = rateLimit({

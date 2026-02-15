@@ -14,6 +14,10 @@ const options: swaggerJsdoc.Options = {
         url: `http://localhost:${APP_CONFIG.PORT}/api/${APP_CONFIG.API_VERSION}`,
         description: "Development server",
       },
+      {
+        url: `https://eventful-api-beta.vercel.app/api/${APP_CONFIG.API_VERSION}`,
+        description: "Production server",
+      },
     ],
     tags: [
       {

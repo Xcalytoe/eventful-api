@@ -8,8 +8,6 @@ import {
   attendeesRoutes,
   usersRoutes,
 } from "./routes";
-import swaggerUi from "swagger-ui-express";
-import swaggerSpec from "./config/swagger";
 import swaggerDocument from "../swagger.json";
 
 const app = express();
@@ -17,9 +15,6 @@ const app = express();
 // Middleware
 app.use(express.json());
 app.use(cookieParser());
-
-// passport-jwt middleware (make sure to require and set this up properly)
-// require("./src/middleware/auth");
 
 const API_BASE = `/api/${APP_CONFIG.API_VERSION}`;
 

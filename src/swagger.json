@@ -9,6 +9,10 @@
     {
       "url": "http://localhost:8000/api/v1",
       "description": "Development server"
+    },
+    {
+      "url": "https://eventful-api-beta.vercel.app/api/v1",
+      "description": "Production server"
     }
   ],
   "tags": [
