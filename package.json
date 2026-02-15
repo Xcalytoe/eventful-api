@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build": "echo 'No build step required' && exit 0",
+    "build": "tsc",
     "test": "jest --coverage",
     "start": "node src/server.ts",
-    "dev": "nodemon src/server.ts",
-    "swagger-gen": "ts-node src/scripts/generateSwagger.ts",
-    "postbuild": "npm run swagger-gen"
+    "dev": "nodemon src/server.ts"
   },
   "keywords": [],
   "author": "Cosmas",
