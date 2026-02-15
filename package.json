@@ -6,7 +6,9 @@
     "build": "echo 'No build step required' && exit 0",
     "test": "jest --coverage",
     "start": "node src/server.ts",
-    "dev": "nodemon src/server.ts"
+    "dev": "nodemon src/server.ts",
+    "swagger-gen": "ts-node src/scripts/generateSwagger.ts",
+    "postbuild": "npm run swagger-gen"
   },
   "keywords": [],
   "author": "Cosmas",

@@ -12,6 +12,7 @@
     "skipLibCheck": true,
     "moduleDetection": "force",
     "moduleResolution": "node",
+    "resolveJsonModule": true,
     "typeRoots": ["./types", "./node_modules/@types"]
   }
 }
