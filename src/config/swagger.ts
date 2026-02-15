@@ -9,16 +9,28 @@ const options: swaggerJsdoc.Options = {
       version: "1.0.0",
       description: "API documentation for the Eventful application",
     },
-    servers: [
-      {
-        url: `http://localhost:${APP_CONFIG.PORT}/api/${APP_CONFIG.API_VERSION}`,
-        description: "Development server",
-      },
-      {
-        url: `https://eventful-api-beta.vercel.app/api/${APP_CONFIG.API_VERSION}`,
-        description: "Production server",
-      },
-    ],
+    servers:
+      process.env.NODE_ENV === "production"
+        ? [
+            {
+              url: `https://eventful-api-beta.vercel.app/api/${APP_CONFIG.API_VERSION}`,
+              description: "Production server",
+            },
+            {
+              url: `http://localhost:${APP_CONFIG.PORT}/api/${APP_CONFIG.API_VERSION}`,
+              description: "Development server",
+            },
+          ]
+        : [
+            {
+              url: `http://localhost:${APP_CONFIG.PORT}/api/${APP_CONFIG.API_VERSION}`,
+              description: "Development server",
+            },
+            {
+              url: `https://eventful-api-beta.vercel.app/api/${APP_CONFIG.API_VERSION}`,
+              description: "Production server",
+            },
+          ],
     tags: [
       {
         name: "Users",
