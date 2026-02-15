@@ -20,50 +20,15 @@ app.use(cookieParser());
 const API_BASE = `/api/${APP_CONFIG.API_VERSION}`;
 
 // Swagger UI
-
-// app.get("/api-docs/swagger.json", (_req, res) => {
-//   res.json(swaggerSpec);
-// });
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
-// app.get("/api-docs", (_req, res) => {
-//   res.send(`
-//     <!DOCTYPE html>
-//     <html lang="en">
-//     <head>
-//       <meta charset="utf-8" />
-//       <meta name="viewport" content="width=device-width, initial-scale=1" />
-//       <title>Eventful API Documentation</title>
-//       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui.min.css" />
-//     </head>
-//     <body>
-//       <div id="swagger-ui"></div>
-//       <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-bundle.js" crossorigin></script>
-//       <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.15.5/swagger-ui-standalone-preset.js" crossorigin></script>
-//       <script>
-//         window.onload = () => {
-//           window.ui = SwaggerUIBundle({
-//             url: '/api-docs/swagger.json',
-//             dom_id: '#swagger-ui',
-//             presets: [
-//               SwaggerUIBundle.presets.apis,
-//               SwaggerUIStandalonePreset
-//             ],
-//             layout: "StandaloneLayout",
-//           });
-//         };
-//       </script>
-//     </body>
-//     </html>
-//   `);
-// });
 
 // Routes
 app.get("/", (_, res) => {
   res.status(200).json({
     message: "Welcome to the Eventful API",
     version: "1.0",
-    documentation: "https://github.com/Xcalytoe/eventful",
+    github: "https://github.com/Xcalytoe/eventful-api",
+    documentation: "https://eventful-api-7f0t.onrender.com/api-docs",
   });
 });
 

@@ -4,8 +4,6 @@ import connectDb from "./config/db";
 import { rateLimit } from "express-rate-limit";
 import { initEmailQueue } from "./queues/emailQueue";
 import "./workers/emailWorker"; // Import to start the worker
-// import morgan from "morgan";
-// import session from "express-session";
 
 const cors = require("cors");
 
@@ -13,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 const allowedOrigins = [
   `http://localhost:${PORT}`,
-  "https://eventful-api-beta.vercel.app",
+  "https://eventful-api-7f0t.onrender.com",
 ];
 
 const corsOptions = {
