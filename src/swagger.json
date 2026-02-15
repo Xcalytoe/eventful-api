@@ -7,10 +7,6 @@
   },
   "servers": [
     {
-      "url": "http://localhost:8000/api/v1",
-      "description": "Development server"
-    },
-    {
       "url": "https://eventful-api-beta.vercel.app/api/v1",
       "description": "Production server"
     }
@@ -50,9 +46,7 @@
     "/analytics/overall": {
       "get": {
         "summary": "Get overall analytics for all events",
-        "tags": [
-          "Admin (Organizer)"
-        ],
+        "tags": ["Admin (Organizer)"],
         "security": [
           {
             "bearerAuth": []
@@ -68,9 +62,7 @@
     "/analytics/event/{id}": {
       "get": {
         "summary": "Get analytics for a specific event",
-        "tags": [
-          "Admin (Organizer)"
-        ],
+        "tags": ["Admin (Organizer)"],
         "security": [
           {
             "bearerAuth": []
@@ -96,9 +88,7 @@
     "/attendees/{id}/apply": {
       "post": {
         "summary": "Apply to an event",
-        "tags": [
-          "Attendees"
-        ],
+        "tags": ["Attendees"],
         "security": [
           {
             "bearerAuth": []
@@ -124,9 +114,7 @@
     "/attendees/{id}/reminder": {
       "post": {
         "summary": "Set a reminder for an event",
-        "tags": [
-          "Attendees"
-        ],
+        "tags": ["Attendees"],
         "security": [
           {
             "bearerAuth": []
@@ -152,9 +140,7 @@
     "/attendees/applied": {
       "get": {
         "summary": "Get attendees for my events (Organizer only)",
-        "tags": [
-          "Admin (Organizer)"
-        ],
+        "tags": ["Admin (Organizer)"],
         "security": [
           {
             "bearerAuth": []
@@ -170,9 +156,7 @@
     "/events": {
       "get": {
         "summary": "Get all events",
-        "tags": [
-          "Events"
-        ],
+        "tags": ["Events"],
         "security": [
           {
             "bearerAuth": []
@@ -188,9 +172,7 @@
     "/events/search-events": {
       "get": {
         "summary": "Search for events",
-        "tags": [
-          "Events"
-        ],
+        "tags": ["Events"],
         "security": [
           {
             "bearerAuth": []
@@ -223,9 +205,7 @@
     "/events/applied": {
       "get": {
         "summary": "Get events the user has applied to",
-        "tags": [
-          "Events"
-        ],
+        "tags": ["Events"],
         "security": [
           {
             "bearerAuth": []
@@ -241,9 +221,7 @@
     "/events/{id}": {
       "get": {
         "summary": "Get a single event by ID",
-        "tags": [
-          "Events"
-        ],
+        "tags": ["Events"],
         "security": [
           {
             "bearerAuth": []
@@ -269,9 +247,7 @@
     "/events/create-event": {
       "post": {
         "summary": "Create a new event",
-        "tags": [
-          "Admin (Organizer)"
-        ],
+        "tags": ["Admin (Organizer)"],
         "security": [
           {
             "bearerAuth": []
@@ -335,9 +311,7 @@
     "/events/{id}/delete": {
       "delete": {
         "summary": "Delete an event",
-        "tags": [
-          "Admin (Organizer)"
-        ],
+        "tags": ["Admin (Organizer)"],
         "security": [
           {
             "bearerAuth": []
@@ -363,9 +337,7 @@
     "/tickets/{id}/generate-ticket": {
       "post": {
         "summary": "Generate a ticket for an event",
-        "tags": [
-          "Tickets"
-        ],
+        "tags": ["Tickets"],
         "security": [
           {
             "bearerAuth": []
@@ -391,9 +363,7 @@
     "/tickets/scan-ticket": {
       "post": {
         "summary": "Scan a ticket",
-        "tags": [
-          "Admin (Organizer)"
-        ],
+        "tags": ["Admin (Organizer)"],
         "security": [
           {
             "bearerAuth": []
@@ -404,9 +374,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "ticketId"
-                ],
+                "required": ["ticketId"],
                 "properties": {
                   "ticketId": {
                     "type": "string"
@@ -426,21 +394,14 @@
     "/users/register": {
       "post": {
         "summary": "Register a new user",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "name",
-                  "email",
-                  "password",
-                  "username"
-                ],
+                "required": ["name", "email", "password", "username"],
                 "properties": {
                   "name": {
                     "type": "string"
@@ -488,19 +449,14 @@
     "/users/login": {
       "post": {
         "summary": "Login user",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "email",
-                  "password"
-                ],
+                "required": ["email", "password"],
                 "properties": {
                   "email": {
                     "type": "string",
@@ -525,9 +481,7 @@
     "/users/logout": {
       "get": {
         "summary": "Logout user",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "responses": {
           "200": {
             "description": "Logout successful"
@@ -538,9 +492,7 @@
     "/users/me": {
       "get": {
         "summary": "Get current user profile",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "security": [
           {
             "bearerAuth": []
